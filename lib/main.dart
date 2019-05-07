@@ -53,7 +53,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demhoe',
+      title: 'EMI Tracker',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -156,8 +156,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
         centerTitle: true,
+        title: Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold)),
         textTheme: TextTheme(
           title: TextStyle(
             color: Colors.black,
@@ -167,12 +167,17 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         backgroundColor: Colors.white10,
         elevation: 0.0,
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.settings, color: Colors.blue), onPressed: () {},)
-        ],
       ),
       body: Column(
         children: <Widget>[
+          Padding(
+            child: Text('EMI Tracker lets you add your current active EMIs (Equated Monthly Installments) and track them. It also shows an overview of how much money you need to pay per month, and the total money you would need to pay.'),
+            padding: EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 16)
+          ),
+          Padding(
+            child: Text('Overview', style: TextStyle(fontWeight: FontWeight.bold), textScaleFactor: 1.2),
+            padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 0)
+          ),
           Center(
             child: Column(
               children: <Widget>[
@@ -192,38 +197,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                     )
                   ],
-                ),
-                Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      RaisedButton(
-                        child: Row(
-                          children: <Widget>[
-                            Padding(child: Icon(Icons.monetization_on, size: 16), padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0)),
-                            Text('Change currency', textScaleFactor: 0.9,)
-                          ],
-                        ),
-                        color: Theme.of(context).accentColor,
-                        textColor: Colors.white,
-                        onPressed: () {},
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
-                      ),
-                    ],
-                  )
                 )
               ],
             ), 
             heightFactor: 1.6,
+          ),
+          Padding(
+            child: Text('Details', style: TextStyle(fontWeight: FontWeight.bold), textScaleFactor: 1.2),
+            padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 0)
           ),
           Flexible(child: ListView.builder(
             itemCount: widget.itemManager.items.length,
             itemBuilder: (BuildContext ctxt, int index) {
               return Container(
                 child: ListTile(
-                  leading: Icon(Icons.attach_money, color: Theme.of(context).primaryColor,),
+                  leading: CircleAvatar(backgroundColor: Theme.of(context).primaryColor, child: Icon(Icons.attach_money, color: Colors.white)),
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
